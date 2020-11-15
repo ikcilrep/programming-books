@@ -1,6 +1,6 @@
 const axios = require("axios");
 
-const getAverageRating = (response) => {
+const getAverageRating = (response, bookId) => {
   const bookData = response.data.items.filter(
     (bookData) => bookData.id == bookId
   )[0];
@@ -14,7 +14,7 @@ exports.handler = async (event) => {
     `https://www.googleapis.com/books/v1/volumes?q=${bookId}`
   );
 
-  const averageRating = getAverageRating(response);
+  const averageRating = getAverageRating(response, bookId);
 
   return {
     statusCode: 200,
