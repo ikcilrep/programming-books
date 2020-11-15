@@ -73,22 +73,23 @@ pageTitle: Eleventy on Glitch
 </template>
 
 <script>
-  fetch(".netlify/functions/books").then((response) => {
-    response.json().then((books) => {
-      const container = document.getElementById("books");
-      const template = document.getElementById("template");
+  const initializeBooks = async () => {
+    const response = await fetch(".netlify/functions/books");
+    const books = await response.json();
+    const container = document.getElementById("books");
+    const template = document.getElementById("template");
 
-      books.forEach((book) => {
-        const element = template.content.cloneNode(true);
+    books.forEach((book) => {
+      const element = template.content.cloneNode(true);
 
-        element.querySelector(".title").textContent = book.title;
-        element.querySelector(".subtitle").textContent = book.subtitle;
-        element.querySelector(".cover").src = book.cover;
-        element.querySelector(".cover").alt = book.title;
-        element.querySelector(".authors").textContent = book.authors.join(", ");
+      element.querySelector(".title").textContent = book.title;
+      element.querySelector(".subtitle").textContent = book.subtitle;
+      element.querySelector(".cover").src = book.cover;
+      element.querySelector(".cover").alt = book.title;
+      element.querySelector(".authors").textContent = book.authors.join(", ");
 
-        container.appendChild(element);
-      });
+      container.appendChild(element);
     });
-  });
+  };
+  initializeBooks();
 </script>
