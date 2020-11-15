@@ -77,7 +77,6 @@ pageTitle: Eleventy on Glitch
   const getRating =  async (bookId) => {
     const response = await fetch(`.netlify/functions/rating?bookId=${bookId}`);
     const jsonResponse = await response.json();
-    console.log(jsonResponse);
     return jsonResponse.rating;
   };
 
