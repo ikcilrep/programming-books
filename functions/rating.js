@@ -5,6 +5,10 @@ const getAverageRating = (response, bookId) => {
     (bookData) => bookData.id == bookId
   )[0];
 
+  if (bookData === undefined) {
+      return response.data.items[0].volumeInfo.averageRating;
+  }
+
   return bookData.volumeInfo.averageRating;
 };
 
